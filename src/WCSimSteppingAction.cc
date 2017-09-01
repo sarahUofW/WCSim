@@ -23,6 +23,8 @@ G4int WCSimSteppingAction::n_photons_on_smallPMT = 0;
 
 void WCSimSteppingAction::UserSteppingAction(const G4Step* aStep)
 {
+  static unsigned photonskilled=0;
+  
   //DISTORTION must be used ONLY if INNERTUBE or INNERTUBEBIG has been defined in BidoneDetectorConstruction.cc
   
   const G4Track* track       = aStep->GetTrack();
@@ -98,6 +100,23 @@ void WCSimSteppingAction::UserSteppingAction(const G4Step* aStep)
 	std::cout << "Optical photon is killed because of missing refractive index in either " << thePrePoint->GetMaterial()->GetName() << " or " << thePostPoint->GetMaterial()->GetName() << 
 	  " : could also be caused by Overlaps with volumes with logicalBoundaries." << std::endl;
 	
+      }
+
+      ++photonskilled;
+      if ( photonskilled%100000==0 ){
+	std::cout<<"Killing optical photon "<<photonskilled<<" at "
+	       <<" prestep x,y,z="
+	       << thePrePoint->GetPosition().x() <<", "
+	       << thePrePoint->GetPosition().y() <<", "
+	       << thePrePoint->GetPosition().z() <<" mat="
+	       << thePrePoint->GetMaterial()->GetName().data()
+	       <<" poststep x,y,z="	
+	       << thePostPoint->GetPosition().x() <<", "
+	       << thePostPoint->GetPosition().y() <<", "
+	       << thePostPoint->GetPosition().z() <<" mat="
+	       << thePostPoint->GetMaterial()->GetName().data()
+	       <<std::endl;
+
       }
       /* Debug :  
       if( (thePrePV->GetName().find("PMT") != std::string::npos) ||

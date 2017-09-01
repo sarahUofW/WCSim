@@ -30,7 +30,7 @@ WCSimTrackingAction::WCSimTrackingAction()
   ParticleList.insert(2212);
   ParticleList.insert(2112);
 
-  percentageOfCherenkovPhotonsToDraw = 0.0;
+  percentageOfCherenkovPhotonsToDraw = 100.;
 
   messenger = new WCSimTrackingMessenger(this);
 }

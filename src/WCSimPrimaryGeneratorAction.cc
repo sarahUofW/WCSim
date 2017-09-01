@@ -1,3 +1,4 @@
+
 #include "WCSimPrimaryGeneratorAction.hh"
 #include "WCSimDetectorConstruction.hh"
 #include "WCSimPrimaryGeneratorMessenger.hh"
@@ -12,7 +13,7 @@
 #include "Randomize.hh"
 #include <fstream>
 #include <vector>
-#include <string>
+#include <string>er
 
 //#include "WCSimEnumerations.hh"
 
@@ -98,8 +99,19 @@ WCSimPrimaryGeneratorAction::~WCSimPrimaryGeneratorAction()
 
 void WCSimPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
+    static int eventcount=0;
+  //if (eventcount%500 == 0){
+    G4cout << "**********************************************************"
+	   << G4endl;
+    G4cout << "WCSimPrimaryGeneratorAction::GeneratePrimaries "
+	   << eventcount << G4endl;
+    G4cout << "**********************************************************"
+	   << G4endl;
+    //}
+  eventcount++;
 
-    // We will need a particle table
+
+  // We will need a particle table
     G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
 
     // Temporary kludge to turn on/off vector text format 
@@ -400,6 +412,14 @@ void WCSimPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
       mode            = LASER; //actually could also be particle gun here. Gps and laser will be separate soon!!
 
+      std::cout<<"Laser event "
+	       <<" pdg="<<pdg
+	       <<" pos="<<vtx.x()/cm<<", "<<vtx.y()/cm<<", "<<vtx.z()/cm<<" cm "
+	       <<" dir="<<dir.x()<<", "<<dir.y()<<", "<<dir.z()<<"  "
+	       <<" E="<<E/MeV
+	       <<" m="<<m/MeV <<" MeV "
+	       <<std::endl;
+      
       SetVtx(vtx);
       SetBeamEnergy(E);
       SetBeamDir(dir);

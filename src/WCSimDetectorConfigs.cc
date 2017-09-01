@@ -489,7 +489,7 @@ void WCSimDetectorConstruction::SetTestSinglemPMTGeometry()
   WCBarrelNRings           = 3;
   WCPMTperCellHorizontal   = 1;
   WCPMTperCellVertical     = 1;
-  WCPMTPercentCoverage     = 10.;
+  //WCPMTPercentCoverage     = 10.; //sarah changed on trevors recomendation
   WCCapEdgeLimit           = WCIDDiameter/2.0 - vessel_tot_height;
   WCCapPMTSpacing          = WCIDDiameter*2.0;
   WCBlackSheetThickness    = 2.0*cm;

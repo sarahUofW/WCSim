@@ -130,11 +130,33 @@ void WCSimEventAction::BeginOfEventAction(const G4Event*)
     G4DigiManager* DMman = G4DigiManager::GetDMpointer();
 
   }
+  static int eventcount=0;
+  //if (eventcount%500 == 0){
+    G4cout << "**********************************************************"
+	   << G4endl;
+    G4cout << "WCSimEventAction::BeginOfEventAction "
+	   << eventcount << G4endl;
+    G4cout << "**********************************************************"
+	   << G4endl;
+    //}
+  eventcount++;
 }
 
 void WCSimEventAction::EndOfEventAction(const G4Event* evt)
 {
 
+  static int eventcount=0;
+  if (eventcount%500 == 0){
+  std::cout << "**********************************************************"
+	    << std::endl;
+  std::cout << "WCSimEventAction::EndOfEventAction "
+	    << eventcount << std::endl;
+  std::cout << "**********************************************************"
+	    << std::endl;
+  }
+  eventcount++;
+
+  
   // ----------------------------------------------------------------------
   //  Get Particle Table
   // ----------------------------------------------------------------------

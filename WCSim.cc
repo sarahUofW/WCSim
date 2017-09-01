@@ -140,7 +140,7 @@ int main(int argc,char** argv)
     //delete session;
   }
   else           // Batch mode
-  { 
+    { //G4UIExecutive * ui = new G4UIExecutive(argc,argv);
     G4String command = "/control/execute ";
     G4String fileName = argv[1];
     file_exists(fileName);
@@ -149,7 +149,8 @@ int main(int argc,char** argv)
       //return -1;
     }
     UI->ApplyCommand(command+fileName);
-
+    //ui->SessionStart();
+    //delete ui;
   }
 
   delete visManager;
